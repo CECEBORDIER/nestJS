@@ -1,8 +1,10 @@
-export class Users {
+export class User {
 
-    constructor(private id: string,
-        private firstName: string,
-        private lastName: string,
-        private email: string,
-        private password: string,) { };
+    constructor(
+        public id: string,
+        public firstName: string,
+        public lastName: string,
+        public email: string,
+        public password: string
+    ) { };
 }

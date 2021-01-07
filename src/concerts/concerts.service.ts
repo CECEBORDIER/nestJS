@@ -5,15 +5,19 @@ import { Concerts } from './concerts.model';
 @Injectable()
 
 export class ConcertsService {
+
     concerts: Concerts[] = [];
-    insertConcert(id: string,
+
+    insertConcert(
         title: string,
         description: string,
         places: number,
         price: number,
         date: Date,
-        image: HTMLImageElement){
-            const newConcert = new Concerts(new Date().toString(), title, description, places, price, date, image);
+        ) {
+        const concID = new Date().toString();
+        const newConcert = new Concerts(concID, title, description, places, price, date);
         this.concerts.push(newConcert);
-        }
+        return concID;
+    }
 }

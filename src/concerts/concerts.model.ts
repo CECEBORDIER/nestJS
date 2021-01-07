@@ -6,6 +6,5 @@ export class Concerts {
         public places: number,
         public price: number,
         public date: Date,
-        public image: HTMLImageElement,
     ) { };
 }
