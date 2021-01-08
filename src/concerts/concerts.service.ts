@@ -6,7 +6,7 @@ import { Concerts } from './concerts.model';
 
 export class ConcertsService {
 
-    concerts: Concerts[] = [];
+    private concerts: Concerts[] = [];
 
     insertConcert(
         title: string,
@@ -19,5 +19,8 @@ export class ConcertsService {
         const newConcert = new Concerts(concID, title, description, places, price, date);
         this.concerts.push(newConcert);
         return concID;
+    }
+    getConcerts(){
+        return [...this.concerts];
     }
 }

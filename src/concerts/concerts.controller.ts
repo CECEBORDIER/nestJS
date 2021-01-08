@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from "@nestjs/common";
+import { Controller, Post, Body, Get } from "@nestjs/common";
 import { ConcertsService } from "./concerts.service";
 
 @Controller("concerts")
@@ -15,5 +15,9 @@ constructor(private concertsService: ConcertsService) {}
     ) {
         const generatedId = this.concertsService.insertConcert(conceTitle, concDesc, concPlaces, concPrice, concDate);
     return {id: generatedId};
+    }
+    @Get()
+    getAllConcerts(){
+        return this.concertsService.getConcerts();
     }
 }
