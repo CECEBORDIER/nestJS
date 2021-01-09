@@ -18,25 +18,47 @@ export class UsersService {
         this.users.push(newUser);
         return UserID;
     }
-    getUsers(){
+    getUsers() {
         return [...this.users];
     }
-    getUserbyId(userId: string){
-        const User = this.users.find((userPlatform)=> userPlatform.id == userId);
-        if (!User) {
-            throw new NotFoundException('Could not find this user. ');
-        }
-        return {...User};
+
+
+    getUserbyId(userId: string) {
+        const user = this.findUser(userId)[0];
+        return { ...user };
     }
-    updateUser(firstName: string,
+
+
+    
+    updateUser(
+        userId: string,
+        firstName: string,
         lastName: string,
         email: string,
-        password: string)
-        {
+        password: string) {
 
+        const [user, index] = this.findUser(userId);
+        const updatedUser = { ...user };
+        if (firstName) {
+            updatedUser.firstName = firstName;
+        } if (lastName) {
+            updatedUser.lastName = lastName;
+        } if (email) {
+            updatedUser.email = email;
+        } if (password) {
+            updatedUser.password = password;
         }
-        private findUser(id: string):[User, number] {
-            const userIndex= this.users.findIndex((user => user.id == id)
-            const user = this.users
+        this.users[index] = updatedUser;
+
+    };
+
+
+    private findUser(id: string): [User, number] {
+        const userIndex = this.users.findIndex(user => user.id == id);
+        const user = this.users[userIndex];
+        if (!user) {
+            throw new NotFoundException('Could not find this concert.');
         }
+        return [user, userIndex];
     }
+}

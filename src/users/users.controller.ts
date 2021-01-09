@@ -36,4 +36,7 @@ export class UsersController {
         @Body('email') userEmail: string,
         @Body('password') userPassword: string,
         )
+        {
+            this.userService.updateUser(userId, userFirstname, userlastname, userEmail, userPassword)
+        }
 }
