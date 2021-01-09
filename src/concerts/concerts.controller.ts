@@ -1,9 +1,9 @@
-import { Controller, Post, Body, Get } from "@nestjs/common";
+import { Controller, Post, Body, Get, Param, Patch } from "@nestjs/common";
 import { ConcertsService } from "./concerts.service";
 
 @Controller("concerts")
 export class ConcertsController {
-constructor(private concertsService: ConcertsService) {}
+    constructor(private concertsService: ConcertsService) { }
 
     @Post()
     addConcert(
@@ -14,10 +14,26 @@ constructor(private concertsService: ConcertsService) {}
         @Body('date') concDate: Date,
     ) {
         const generatedId = this.concertsService.insertConcert(conceTitle, concDesc, concPlaces, concPrice, concDate);
-    return {id: generatedId};
+        return { id: generatedId };
     }
     @Get()
-    getAllConcerts(){
+    getAllConcerts() {
         return this.concertsService.getConcerts();
+    }
+    @Get(':id')
+    getConcert(@Param('id') concID: string,) {
+        return this.concertsService.getSingleConcert(concID);
+    }
+    @Patch(':id')
+    updateConcert(
+        @Param('id') concID: string,
+        @Body('title') conceTitle: string,
+        @Body('description') concDesc: string,
+        @Body('places') concPlaces: number,
+        @Body('price') concPrice: number,
+        @Body('date') concDate: Date,
+    ) {
+        this.concertsService.UpdateConcert(concID, conceTitle, concDesc, concPlaces, concPrice, concDate)
+   return null;
     }
 }
