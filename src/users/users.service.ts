@@ -12,9 +12,10 @@ export class UsersService {
         lastName: string,
         email: string,
         password: string,
+        admin: boolean
     ) {
         const UserID = Math.random().toString();
-        const newUser = new User(UserID, firstName, lastName, email, password);
+        const newUser = new User(UserID, firstName, lastName, email, password, admin);
         this.users.push(newUser);
         return UserID;
     }
@@ -29,13 +30,14 @@ export class UsersService {
     }
 
 
-    
+
     updateUser(
         userId: string,
         firstName: string,
         lastName: string,
         email: string,
-        password: string) {
+        password: string,
+        admin: boolean ){
 
         const [user, index] = this.findUser(userId);
         const updatedUser = { ...user };
@@ -47,6 +49,8 @@ export class UsersService {
             updatedUser.email = email;
         } if (password) {
             updatedUser.password = password;
+        }if(admin){
+            updatedUser.admin= admin;
         }
         this.users[index] = updatedUser;
 

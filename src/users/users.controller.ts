@@ -11,12 +11,15 @@ export class UsersController {
         @Body('lastName') userlastname: string,
         @Body('email') userEmail: string,
         @Body('password') userPassword: string,
+        @Body('admin') userAdmin: boolean,
     ) {
         const generateId = this.userService.insertUser(
             userFirstname,
             userlastname,
             userEmail,
-            userPassword)
+            userPassword,
+            userAdmin,
+            )
         return { id: generateId };
     }
     @Get()
@@ -35,8 +38,9 @@ export class UsersController {
         @Body('lastName') userlastname: string,
         @Body('email') userEmail: string,
         @Body('password') userPassword: string,
+        @Body('admin') userAdmin: boolean,
         )
         {
-            this.userService.updateUser(userId, userFirstname, userlastname, userEmail, userPassword)
+            this.userService.updateUser(userId, userFirstname, userlastname, userEmail, userPassword, userAdmin)
         }
 }
