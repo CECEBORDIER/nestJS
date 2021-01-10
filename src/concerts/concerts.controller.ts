@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Patch } from "@nestjs/common";
+import { Controller, Post, Body, Get, Param, Patch, Delete } from "@nestjs/common";
 import { ConcertsService } from "./concerts.service";
 
 @Controller("concerts")
@@ -34,6 +34,15 @@ export class ConcertsController {
         @Body('date') concDate: Date,
     ) {
         this.concertsService.UpdateConcert(concID, conceTitle, concDesc, concPlaces, concPrice, concDate)
-   return null;
+        return null;
     }
+    @Delete(':id')
+    removeConcert(@Param('id') concID: string) {
+        this.concertsService.removeConcert(concID);
+        return null;
+
+    }
+
+
+
 }

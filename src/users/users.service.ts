@@ -65,4 +65,8 @@ export class UsersService {
         }
         return [user, userIndex];
     }
+    removeUser(id: string) {
+        const index = this.findUser(id)[1];
+        this.users.splice(index, 1)
+    }
 }

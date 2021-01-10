@@ -40,8 +40,7 @@ export class ConcertsService {
         description: string,
         places: number,
         price: number,
-        date: Date,) 
-        {
+        date: Date,) {
 
         const [concert, index] = this.findConcert(concertId);
         const updatedConcert = { ...concert };
@@ -67,5 +66,11 @@ export class ConcertsService {
             throw new NotFoundException('Could not find this concert. ');
         }
         return [concert, concertIndex];
+    }
+
+    removeConcert(id: string) {
+        const index = this.findConcert(id)[1];
+        this.concerts.splice(index, 1)
+      
     }
 }
